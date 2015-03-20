@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<or abstract="true" mandatory="true" name="SaaSFeatures">
+				<and mandatory="true" name="Base">
+					<alt abstract="true" mandatory="true" name="Activity">
+						<feature mandatory="true" name="Task"/>
+						<feature mandatory="true" name="Story"/>
+						<feature mandatory="true" name="Card"/>
+					</alt>
+					<alt abstract="true" mandatory="true" name="ProjectsBase">
+						<feature mandatory="true" name="Project"/>
+						<feature mandatory="true" name="Sprint"/>
+						<feature mandatory="true" name="Board"/>
+					</alt>
+					<or abstract="true" mandatory="true" name="Progress">
+						<feature mandatory="true" name="HoursWorked"/>
+						<feature mandatory="true" name="PercentComplete"/>
+						<feature mandatory="true" name="Status"/>
+						<feature mandatory="true" name="Lane"/>
+						<feature mandatory="true" name="WorkRemaining"/>
+						<feature mandatory="true" name="EstimatedCompletion"/>
+					</or>
+					<feature name="Resource"/>
+					<feature name="Risk"/>
+					<feature name="Calendar"/>
+					<feature name="Analytics"/>
+				</and>
+			</or>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>Task</var>
+					<var>Project</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Project</var>
+					<conj>
+						<var>HoursWorked</var>
+						<var>PercentComplete</var>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Card</var>
+					<var>Board</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Board</var>
+					<conj>
+						<var>EstimatedCompletion</var>
+						<var>WorkRemaining</var>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Story</var>
+					<var>Sprint</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Sprint</var>
+					<conj>
+						<var>Status</var>
+						<var>Lane</var>
+					</conj>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
